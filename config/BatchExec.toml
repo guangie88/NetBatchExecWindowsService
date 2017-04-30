@@ -1,0 +1,9 @@
+[[CmdGroups]]
+FileName = "D:\\comm_service\\comm_service.exe"
+Arguments = "-l D:\\comm_service\\config\\comm_service_log.yml -n comm -p 17385"
+WindowStyle = "Normal"
+
+[[CmdGroups]]
+FileName = "\\\\Hikari\\share\\Share\\comm_service\\comm_service.exe"
+Arguments = "-l \\\\Hikari\\share\\Share\\comm_service\\config\\comm_service_log.yml -n comm -p 17386"
+WindowStyle = "Normal"

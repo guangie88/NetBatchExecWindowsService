@@ -1,12 +1,12 @@
 ﻿using Nett;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BatchExecService
 {
@@ -19,12 +19,12 @@ namespace BatchExecService
 
         protected override void OnStart(string[] args)
         {
-            if (args.Length != 1)
-            {
-                Environment.FailFast("Invalid usage, expected: service <path to toml config>");
-            }
+            // derive the configuration file path
+            var exeFilePath = Assembly.GetEntryAssembly().Location;
+            var exeDirFilePath = Path.GetDirectoryName(exeFilePath);
+            var exeFileStem = Path.GetFileNameWithoutExtension(exeFilePath);
+            var configFilePath = Path.Combine(exeDirFilePath, exeFileStem + ".toml");
 
-            var configFilePath = args[0];
             var config = Toml.ReadFile<Config>(configFilePath);
 
             processesMtx.WaitOne();
